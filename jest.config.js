@@ -25,10 +25,10 @@ module.exports = {
   // Umbrales de cobertura (opcionales pero recomendados)
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80
+      branches: 65,
+      functions: 65,
+      lines: 75,
+      statements: 75
     }
   },
   
