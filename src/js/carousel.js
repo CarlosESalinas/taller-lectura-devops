@@ -2,6 +2,7 @@
  * Carousel
  * 
  * Maneja la rotación de imágenes (dibujos de los niños)
+ * Adaptado para scroll horizontal con el diseño del Taller de Lectura
  * 
  * SOLID Principles:
  * - S: Solo maneja lógica del carrusel
@@ -22,10 +23,19 @@ class Carousel {
     }
 
     this.container = container;
-    this.images = Array.from(container.querySelectorAll('.carousel-image') || []);
+    
+    // Adaptación: buscar .carousel-slide en lugar de .carousel-image
+    this.images = Array.from(container.querySelectorAll('.carousel-slide') || []);
+    
+    // Si no hay slides, intentar buscar .carousel-image (retrocompatibilidad)
+    if (this.images.length === 0) {
+      this.images = Array.from(container.querySelectorAll('.carousel-image') || []);
+    }
+    
     this.currentIndex = 0;
     this.autoPlayInterval = options.autoPlayInterval || 3000;
     this.autoPlayTimer = null;
+    this.isScrolling = false;
 
     if (this.images.length === 0) {
       console.warn('No se encontraron imágenes en el carrusel');
@@ -61,15 +71,24 @@ class Carousel {
       nextBtn.addEventListener('click', () => this.next());
     }
 
-    // Dots de navegación (si existen)
-    const dots = this.container.querySelectorAll('.carousel-dot');
+    // Adaptación: buscar tanto .carousel-dot como .indicator
+    const dots = this.container.querySelectorAll('.carousel-dot, .indicator');
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => this.goToSlide(index));
     });
+
+    // Detectar scroll manual (si el container tiene overflow)
+    if (this.container.scrollWidth > this.container.clientWidth) {
+      this.container.addEventListener('scroll', () => {
+        if (!this.isScrolling) {
+          this.handleManualScroll();
+        }
+      });
+    }
   }
 
   /**
-   * Ir a la siguiente imagen 
+   * Ir a la siguiente imagen
    */
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
@@ -96,9 +115,38 @@ class Carousel {
   }
 
   /**
+   * Manejar scroll manual del usuario
+   * @private
+   */
+  handleManualScroll() {
+    // Calcular qué imagen está más centrada
+    const containerCenter = this.container.scrollLeft + this.container.offsetWidth / 2;
+    
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    this.images.forEach((img, index) => {
+      const imgCenter = img.offsetLeft + img.offsetWidth / 2;
+      const distance = Math.abs(containerCenter - imgCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    if (closestIndex !== this.currentIndex) {
+      this.currentIndex = closestIndex;
+      this.updateDisplay();
+      this.resetAutoPlay();
+    }
+  }
+
+  /**
    * Actualizar visualización del carrusel
    */
   updateDisplay() {
+    // Actualizar clases de las imágenes
     this.images.forEach((img, index) => {
       if (index === this.currentIndex) {
         img.classList.add('active');
@@ -107,8 +155,13 @@ class Carousel {
       }
     });
 
-    // Actualizar dots si existen
-    const dots = this.container.querySelectorAll('.carousel-dot');
+    // Scroll suave a la imagen actual (si hay scroll)
+    if (this.container.scrollWidth > this.container.clientWidth) {
+      this.scrollToCurrentImage();
+    }
+
+    // Actualizar dots (buscar tanto .carousel-dot como .indicator)
+    const dots = this.container.querySelectorAll('.carousel-dot, .indicator');
     dots.forEach((dot, index) => {
       if (index === this.currentIndex) {
         dot.classList.add('active');
@@ -119,10 +172,33 @@ class Carousel {
   }
 
   /**
+   * Scroll suave a la imagen actual
+   * @private
+   */
+  scrollToCurrentImage() {
+    const currentImage = this.images[this.currentIndex];
+    if (!currentImage) return;
+
+    this.isScrolling = true;
+
+    const scrollPosition = currentImage.offsetLeft - 
+      (this.container.offsetWidth - currentImage.offsetWidth) / 2;
+
+    this.container.scrollTo({
+      left: scrollPosition,
+      behavior: 'smooth'
+    });
+
+    setTimeout(() => {
+      this.isScrolling = false;
+    }, 600);
+  }
+
+  /**
    * Iniciar auto-play
    */
   startAutoPlay() {
-    this.stopAutoPlay(); // Limpiar timer anterior si existe
+    this.stopAutoPlay();
     this.autoPlayTimer = setInterval(() => {
       this.next();
     }, this.autoPlayInterval);
@@ -139,11 +215,24 @@ class Carousel {
   }
 
   /**
+   * Resetear auto-play (reiniciar timer)
+   */
+  resetAutoPlay() {
+    this.startAutoPlay();
+  }
+
+  /**
+   * Pausar auto-play
+   */
+  pauseAutoPlay() {
+    this.stopAutoPlay();
+  }
+
+  /**
    * Destruir carrusel (cleanup)
    */
   destroy() {
     this.stopAutoPlay();
-    // Remover event listeners si es necesario
   }
 }
 
