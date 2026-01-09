@@ -1,17 +1,3 @@
-/**
- * Carousel
- * 
- * Maneja la rotación de imágenes (dibujos de los niños)
- * Adaptado para scroll horizontal con el diseño del Taller de Lectura
- * 
- * SOLID Principles:
- * - S: Solo maneja lógica del carrusel
- * - O: Extensible para diferentes tipos de contenido
- * - L: Cualquier contenedor que tenga imágenes funciona
- * - I: Interfaz simple (next, prev, goToSlide)
- * - D: Depende de abstracción (container), no de DOM específico
- */
-
 class Carousel {
   /**
    * @param {HTMLElement} container - Contenedor del carrusel
