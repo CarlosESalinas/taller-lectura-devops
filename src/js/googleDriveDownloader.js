@@ -1,8 +1,8 @@
 /**
  * GoogleDriveDownloader
- * 
+ *
  * Maneja descargas de archivos desde Google Drive
- * 
+ *
  * SOLID Principles:
  * - S: Solo maneja lógica de descarga de Google Drive
  * - D: Inyección de dependencias (window para testing)
@@ -13,7 +13,8 @@ class GoogleDriveDownloader {
    * @param {Object} options - Opciones de configuración
    */
   constructor(options = {}) {
-    this.window = options.window || (typeof window !== 'undefined' ? window : null);
+    this.window =
+      options.window || (typeof window !== 'undefined' ? window : null);
   }
 
   /**
@@ -48,7 +49,7 @@ class GoogleDriveDownloader {
    */
   getDirectDownloadUrl(viewerUrl) {
     const fileId = this.extractFileId(viewerUrl);
-    
+
     if (!fileId) {
       throw new Error('No se pudo extraer el file ID de la URL');
     }

@@ -16,6 +16,11 @@
   "plugins": [
     "prettier"
   ],
+  "globals":{
+    "Carousel": "readonly",
+    "DownloadCounter": "readonly",
+    "GoogleDriveDownloader": "readonly"
+  },
   "rules": {
     "prettier/prettier": "error",
     "no-console": "warn",
