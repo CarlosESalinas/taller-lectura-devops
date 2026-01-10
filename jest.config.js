@@ -15,11 +15,15 @@ module.exports = {
     '/build/'
   ],
   
+  // Setup files 
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js']
+
   // Configuración de cobertura
   collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
-    '!src/**/*.spec.js'
+    'src/js/**/*.js',
+    '!src/js/app.js',
+    '!src/**/*.spec.js',
+    '!**/node_modules/**'
   ],
   
   // Umbrales de cobertura (opcionales pero recomendados)
