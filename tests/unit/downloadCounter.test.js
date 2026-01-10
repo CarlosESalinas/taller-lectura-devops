@@ -43,7 +43,7 @@ describe('DownloadCounter', () => {
   test('debe incrementar contador correctamente', () => {
     counter.increment();
     expect(counter.getCount()).toBe(1);
-    
+
     counter.increment();
     expect(counter.getCount()).toBe(2);
   });
@@ -63,10 +63,10 @@ describe('DownloadCounter', () => {
    */
   test('debe cargar contador existente del storage', () => {
     mockStorage.data.downloadCount = '42';
-    
+
     const { DownloadCounter } = require('../../src/js/downloadCounter.js');
     const newCounter = new DownloadCounter(mockStorage);
-    
+
     expect(newCounter.getCount()).toBe(42);
   });
 
@@ -79,10 +79,10 @@ describe('DownloadCounter', () => {
       getItem: jest.fn(() => '10'),
       setItem: jest.fn(),
     };
-    
+
     const { DownloadCounter } = require('../../src/js/downloadCounter.js');
     const customCounter = new DownloadCounter(customStorage);
-    
+
     expect(customCounter.getCount()).toBe(10);
   });
 
@@ -93,7 +93,7 @@ describe('DownloadCounter', () => {
     counter.increment();
     counter.increment();
     counter.reset();
-    
+
     expect(counter.getCount()).toBe(0);
     expect(mockStorage.setItem).toHaveBeenCalledWith('downloadCount', '0');
   });

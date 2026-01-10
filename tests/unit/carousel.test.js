@@ -9,53 +9,53 @@ describe('Carousel', () => {
   let mockImages;
 
   beforeEach(() => {
-  // Mock de elementos DOM
-  const createMockElement = () => ({
-    classList: {
-      add: jest.fn(),
-      remove: jest.fn(),
-    },
-    addEventListener: jest.fn(),
+    // Mock de elementos DOM
+    const createMockElement = () => ({
+      classList: {
+        add: jest.fn(),
+        remove: jest.fn(),
+      },
+      addEventListener: jest.fn(),
+    });
+
+    // Mock de imágenes
+    mockImages = [
+      createMockElement(),
+      createMockElement(),
+      createMockElement(),
+    ];
+
+    // Mock de botones y dots
+    const mockPrevBtn = createMockElement();
+    const mockNextBtn = createMockElement();
+    const mockDots = []; // Array vacío porque no hay dots en el test
+
+    // Mock del container
+    mockContainer = {
+      querySelectorAll: jest.fn((selector) => {
+        if (selector === '.carousel-image') {
+          return mockImages;
+        }
+        if (selector === '.carousel-dot') {
+          return mockDots;
+        }
+        return [];
+      }),
+      querySelector: jest.fn((selector) => {
+        if (selector === '.carousel-prev') {
+          return mockPrevBtn;
+        }
+        if (selector === '.carousel-next') {
+          return mockNextBtn;
+        }
+        return null;
+      }),
+      addEventListener: jest.fn(),
+    };
+
+    const { Carousel } = require('../../src/js/carousel.js');
+    carousel = new Carousel(mockContainer);
   });
-
-  // Mock de imágenes
-  mockImages = [
-    createMockElement(),
-    createMockElement(),
-    createMockElement(),
-  ];
-
-  // Mock de botones y dots
-  const mockPrevBtn = createMockElement();
-  const mockNextBtn = createMockElement();
-  const mockDots = []; // Array vacío porque no hay dots en el test
-
-  // Mock del container
-  mockContainer = {
-    querySelectorAll: jest.fn((selector) => {
-      if (selector === '.carousel-image') {
-        return mockImages;
-      }
-      if (selector === '.carousel-dot') {
-        return mockDots;
-      }
-      return [];
-    }),
-    querySelector: jest.fn((selector) => {
-      if (selector === '.carousel-prev') {
-        return mockPrevBtn;
-      }
-      if (selector === '.carousel-next') {
-        return mockNextBtn;
-      }
-      return null;
-    }),
-    addEventListener: jest.fn(),
-  };
-
-  const { Carousel } = require('../../src/js/carousel.js');
-  carousel = new Carousel(mockContainer);
-});
 
   afterEach(() => {
     // Limpiar timers
@@ -77,7 +77,7 @@ describe('Carousel', () => {
   test('debe avanzar a la siguiente imagen', () => {
     carousel.next();
     expect(carousel.currentIndex).toBe(1);
-    
+
     carousel.next();
     expect(carousel.currentIndex).toBe(2);
   });
@@ -118,7 +118,7 @@ describe('Carousel', () => {
 
     // La imagen 1 debe tener clase 'active'
     expect(mockImages[1].classList.add).toHaveBeenCalledWith('active');
-    
+
     // Las demás deben quitar la clase 'active'
     expect(mockImages[0].classList.remove).toHaveBeenCalledWith('active');
     expect(mockImages[2].classList.remove).toHaveBeenCalledWith('active');
@@ -138,7 +138,7 @@ describe('Carousel', () => {
   test('debe validar índices fuera de rango', () => {
     carousel.goToSlide(10);
     expect(carousel.currentIndex).toBe(0); // Se mantiene en posición segura
-    
+
     carousel.goToSlide(-5);
     expect(carousel.currentIndex).toBe(0);
   });

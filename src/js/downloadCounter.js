@@ -1,18 +1,22 @@
 class DownloadCounter {
   /**
    * @param {Object} storage - Objeto con interfaz de storage (getItem, setItem)
-   * 
+   *
    * Dependency Injection: Inyectamos el storage en lugar de usar localStorage directamente
    * Ventaja: Podemos mockear en tests, cambiar a sessionStorage, IndexedDB, etc.
    */
   constructor(storage) {
-    if (!storage || typeof storage.getItem !== 'function' || typeof storage.setItem !== 'function') {
+    if (
+      !storage ||
+      typeof storage.getItem !== 'function' ||
+      typeof storage.setItem !== 'function'
+    ) {
       throw new Error('Storage debe implementar getItem y setItem');
     }
 
     this.storage = storage;
     this.storageKey = 'downloadCount';
-    
+
     // Cargar contador existente o inicializar en 0
     this.count = this._loadCount();
   }

@@ -13,7 +13,9 @@ describe('GoogleDriveDownloader', () => {
       open: jest.fn(),
     };
 
-    const { GoogleDriveDownloader } = require('../../src/js/googleDriveDownloader.js');
+    const {
+      GoogleDriveDownloader,
+    } = require('../../src/js/googleDriveDownloader.js');
     downloader = new GoogleDriveDownloader({ window: mockWindow });
   });
 
@@ -23,8 +25,10 @@ describe('GoogleDriveDownloader', () => {
   test('debe convertir URL de viewer a descarga directa', () => {
     const viewerUrl = 'https://drive.google.com/file/d/ABC123/view?usp=sharing';
     const downloadUrl = downloader.getDirectDownloadUrl(viewerUrl);
-    
-    expect(downloadUrl).toBe('https://drive.google.com/uc?export=download&id=ABC123');
+
+    expect(downloadUrl).toBe(
+      'https://drive.google.com/uc?export=download&id=ABC123'
+    );
   });
 
   /**
@@ -37,7 +41,7 @@ describe('GoogleDriveDownloader', () => {
       'https://drive.google.com/open?id=ABC123',
     ];
 
-    urls.forEach(url => {
+    urls.forEach((url) => {
       const fileId = downloader.extractFileId(url);
       expect(fileId).toBe('ABC123');
     });
@@ -49,7 +53,7 @@ describe('GoogleDriveDownloader', () => {
   test('debe iniciar descarga abriendo nueva ventana', () => {
     const fileId = 'ABC123';
     downloader.download(fileId);
-    
+
     expect(mockWindow.open).toHaveBeenCalledWith(
       'https://drive.google.com/uc?export=download&id=ABC123',
       '_blank'
@@ -62,7 +66,7 @@ describe('GoogleDriveDownloader', () => {
   test('debe manejar URLs inválidas sin lanzar error', () => {
     const invalidUrl = 'https://example.com/not-a-drive-url';
     const fileId = downloader.extractFileId(invalidUrl);
-    
+
     expect(fileId).toBeNull();
   });
 
@@ -72,9 +76,9 @@ describe('GoogleDriveDownloader', () => {
   test('debe ejecutar callback después de iniciar descarga', () => {
     const callback = jest.fn();
     const fileId = 'ABC123';
-    
+
     downloader.download(fileId, callback);
-    
+
     expect(callback).toHaveBeenCalled();
     expect(mockWindow.open).toHaveBeenCalled();
   });

@@ -2,392 +2,416 @@
    VARIABLES CSS - Paleta de colores
    ========================================== */
 :root {
-    /* Colores principales */
-    --purple-dark: #421F73;      /* Fondo principal */
-    --purple-deeper: #331859;     /* Fondo secundario */
-    --purple-bright: #5550F2;     /* Acento púrpura brillante */
-    --cyan-bright: #2BD9B9;       /* Acento cyan para botones */
-    --white: #FFFFFF;             /* Texto y elementos claros */
-    --purple-accent: #8E0480;     /* Acento púrpura vibrante */
-    
-    /* Espaciado */
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 3rem;
-    --spacing-xl: 4rem;
-    
-    /* Sombras */
-    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.4);
-    --shadow-glow-cyan: 0 0 30px rgba(43, 217, 185, 0.4);
-    --shadow-glow-purple: 0 0 40px rgba(85, 80, 242, 0.3);
-    
-    /* Transiciones */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Colores principales */
+  --purple-dark: #421f73; /* Fondo principal */
+  --purple-deeper: #331859; /* Fondo secundario */
+  --purple-bright: #5550f2; /* Acento púrpura brillante */
+  --cyan-bright: #2bd9b9; /* Acento cyan para botones */
+  --white: #ffffff; /* Texto y elementos claros */
+  --purple-accent: #8e0480; /* Acento púrpura vibrante */
+
+  /* Espaciado */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 4rem;
+
+  /* Sombras */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-glow-cyan: 0 0 30px rgba(43, 217, 185, 0.4);
+  --shadow-glow-purple: 0 0 40px rgba(85, 80, 242, 0.3);
+
+  /* Transiciones */
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* ==========================================
    RESET Y ESTILOS BASE
    ========================================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, var(--purple-deeper) 0%, var(--purple-dark) 50%, var(--purple-deeper) 100%);
-    min-height: 100vh;
-    color: var(--white);
-    overflow-x: hidden;
-    position: relative;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(
+    135deg,
+    var(--purple-deeper) 0%,
+    var(--purple-dark) 50%,
+    var(--purple-deeper) 100%
+  );
+  min-height: 100vh;
+  color: var(--white);
+  overflow-x: hidden;
+  position: relative;
 }
 
 /* ==========================================
    DECORACIONES DE FONDO
    ========================================== */
 .background-decoration {
-    position: fixed;
-    border-radius: 50%;
-    opacity: 0.15;
-    z-index: 0;
-    pointer-events: none;
+  position: fixed;
+  border-radius: 50%;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .decoration-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--purple-bright) 0%, transparent 70%);
-    top: -200px;
-    right: -200px;
-    animation: float 20s ease-in-out infinite;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--purple-bright) 0%, transparent 70%);
+  top: -200px;
+  right: -200px;
+  animation: float 20s ease-in-out infinite;
 }
 
 .decoration-2 {
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, var(--cyan-bright) 0%, transparent 70%);
-    bottom: -100px;
-    left: -100px;
-    animation: float 25s ease-in-out infinite reverse;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--cyan-bright) 0%, transparent 70%);
+  bottom: -100px;
+  left: -100px;
+  animation: float 25s ease-in-out infinite reverse;
 }
 
 @keyframes float {
-    0%, 100% {
-        transform: translate(0, 0) scale(1);
-    }
-    50% {
-        transform: translate(30px, -30px) scale(1.1);
-    }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
 }
 
 /* ==========================================
    HEADER - Gradiente y título
    ========================================== */
 .header {
-    background: linear-gradient(90deg, var(--purple-bright) 0%, var(--cyan-bright) 100%);
-    padding: var(--spacing-md) var(--spacing-sm);
-    position: relative;
-    z-index: 10;
-    box-shadow: var(--shadow-medium);
+  background: linear-gradient(
+    90deg,
+    var(--purple-bright) 0%,
+    var(--cyan-bright) 100%
+  );
+  padding: var(--spacing-md) var(--spacing-sm);
+  position: relative;
+  z-index: 10;
+  box-shadow: var(--shadow-medium);
 }
 
 .header-content {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header-title {
-    font-family: 'Fredoka', sans-serif;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 600;
-    color: var(--white);
-    text-align: center;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    animation: fadeInDown 0.8s ease-out;
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: var(--white);
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeInDown 0.8s ease-out;
 }
 
 @keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================
    CONTENIDO PRINCIPAL
    ========================================== */
 .main-content {
-    position: relative;
-    z-index: 1;
-    padding: var(--spacing-xl) var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+  padding: var(--spacing-xl) var(--spacing-sm);
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* ==========================================
    TÍTULO PRINCIPAL "Acerca de este proyecto"
    ========================================== */
 .main-title {
-    font-family: 'Fredoka', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 700;
-    color: var(--white);
-    text-align: center;
-    margin-bottom: var(--spacing-xl);
-    letter-spacing: 1px;
-    line-height: 1.2;
-    animation: fadeInScale 1s ease-out 0.2s backwards;
+  font-family: 'Fredoka', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  letter-spacing: 1px;
+  line-height: 1.2;
+  animation: fadeInScale 1s ease-out 0.2s backwards;
 }
 
 @keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* ==========================================
    CARRUSEL DE IMÁGENES
    ========================================== */
 .carousel-container {
-    margin: var(--spacing-xl) auto;
-    max-width: 100%;
-    animation: fadeInUp 1s ease-out 0.4s backwards;
+  margin: var(--spacing-xl) auto;
+  max-width: 100%;
+  animation: fadeInUp 1s ease-out 0.4s backwards;
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .carousel-wrapper {
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: var(--shadow-medium);
-    position: relative;
-    background: rgba(51, 24, 89, 0.5);
-    padding: var(--spacing-md);
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: var(--shadow-medium);
+  position: relative;
+  background: rgba(51, 24, 89, 0.5);
+  padding: var(--spacing-md);
 }
 
 /* Efecto de viñeta en los bordes del carrusel */
 .carousel-wrapper::before,
 .carousel-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100px;
-    z-index: 2;
-    pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .carousel-wrapper::before {
-    left: 0;
-    background: linear-gradient(to right, rgba(51, 24, 89, 0.8) 0%, transparent 100%);
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(51, 24, 89, 0.8) 0%,
+    transparent 100%
+  );
 }
 
 .carousel-wrapper::after {
-    right: 0;
-    background: linear-gradient(to left, rgba(51, 24, 89, 0.8) 0%, transparent 100%);
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(51, 24, 89, 0.8) 0%,
+    transparent 100%
+  );
 }
 
 .carousel-track {
-    display: flex;
-    gap: var(--spacing-md);
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    
-    /* Ocultar scrollbar pero mantener funcionalidad */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
+  display: flex;
+  gap: var(--spacing-md);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  /* Ocultar scrollbar pero mantener funcionalidad */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
 .carousel-track::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+  display: none; /* Chrome/Safari */
 }
 
 .carousel-slide {
-    flex: 0 0 300px;
-    height: 350px;
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: var(--shadow-soft);
-    background: var(--white);
-    transition: var(--transition-smooth);
-    scroll-snap-align: center;  /* Añadir esta línea */
+  flex: 0 0 300px;
+  height: 350px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  background: var(--white);
+  transition: var(--transition-smooth);
+  scroll-snap-align: center; /* Añadir esta línea */
 }
 
 .carousel-slide:hover {
-    transform: scale(1.05) translateY(-10px);
-    box-shadow: var(--shadow-glow-cyan);
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: var(--shadow-glow-cyan);
 }
 
 .carousel-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: var(--transition-smooth);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition-smooth);
 }
 
 .carousel-slide:hover .carousel-image {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 /* ==========================================
    INDICADORES DEL CARRUSEL
    ========================================== */
 .carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-xs);
-    margin-top: var(--spacing-md);
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-md);
 }
 
 .indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    border: 2px solid var(--white);
-    cursor: pointer;
-    transition: var(--transition-smooth);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--white);
+  cursor: pointer;
+  transition: var(--transition-smooth);
 }
 
 .indicator.active {
-    background: var(--cyan-bright);
-    box-shadow: var(--shadow-glow-cyan);
-    transform: scale(1.3);
+  background: var(--cyan-bright);
+  box-shadow: var(--shadow-glow-cyan);
+  transform: scale(1.3);
 }
 
 .indicator:hover {
-    background: rgba(43, 217, 185, 0.6);
-    transform: scale(1.2);
+  background: rgba(43, 217, 185, 0.6);
+  transform: scale(1.2);
 }
 
 /* ==========================================
    BOTÓN DE DESCARGA
    ========================================== */
 .download-section {
-    display: flex;
-    justify-content: center;
-    margin-top: var(--spacing-xl);
-    animation: fadeInUp 1s ease-out 0.6s backwards;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+  animation: fadeInUp 1s ease-out 0.6s backwards;
 }
 
 .download-button {
-    font-family: 'Fredoka', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--purple-dark);
-    background: var(--cyan-bright);
-    border: none;
-    padding: 1rem 3rem;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: var(--shadow-medium);
-    transition: var(--transition-bounce);
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--purple-dark);
+  background: var(--cyan-bright);
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.5px;
 }
 
 /* Efecto de brillo en el botón */
 .download-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.6s,
+    height 0.6s;
 }
 
 .download-button:hover::before {
-    width: 300px;
-    height: 300px;
+  width: 300px;
+  height: 300px;
 }
 
 .download-button:hover {
-    transform: scale(1.1) translateY(-5px);
-    box-shadow: var(--shadow-glow-cyan);
-    background: #35E9C9;
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: var(--shadow-glow-cyan);
+  background: #35e9c9;
 }
 
 .download-button:active {
-    transform: scale(1.05) translateY(-2px);
+  transform: scale(1.05) translateY(-2px);
 }
 
 /* ==========================================
    FOOTER - Gradiente y título
    ========================================== */
 .footer {
-    background: linear-gradient(90deg, var(--purple-dark) 0%, var(--purple-accent) 100%);
-    padding: 0.75rem 1rem;
-    position: relative;
-    z-index: 10;
-    box-shadow: var(--shadow-medium);
+  background: linear-gradient(
+    90deg,
+    var(--purple-dark) 0%,
+    var(--purple-accent) 100%
+  );
+  padding: 0.75rem 1rem;
+  position: relative;
+  z-index: 10;
+  box-shadow: var(--shadow-medium);
 }
 
 .footer-content {
-    max-width: 300px;
-    max-height: 1500px;
-    margin: 0 auto;
+  max-width: 300px;
+  max-height: 1500px;
+  margin: 0 auto;
 }
 
 .footer-paragraph {
-    color: var(--white);           /* Color cyan */
-    text-decoration: none;               /* Sin subrayado por defecto */
-    /*evitar salto de línea inesperado*/
-    line-height: 1.1;
-    text-align: center;
-    font-size: 0.85rem;
+  color: var(--white); /* Color cyan */
+  text-decoration: none; /* Sin subrayado por defecto */
+  /*evitar salto de línea inesperado*/
+  line-height: 1.1;
+  text-align: center;
+  font-size: 0.85rem;
 }
 
 .footer-paragraph a {
-    color: var(--cyan-bright);           /* Color cyan */
-    text-decoration: none;               /* Sin subrayado por defecto */
-    transition: var(--transition-smooth);
-    border-bottom: 1px solid transparent;
-    font-size: 0.85rem;
+  color: var(--cyan-bright); /* Color cyan */
+  text-decoration: none; /* Sin subrayado por defecto */
+  transition: var(--transition-smooth);
+  border-bottom: 1px solid transparent;
+  font-size: 0.85rem;
 }
 
 .footer-paragraph a:hover {
-    color: var(--lime-green);            /* Verde lima al hover */
-    border-bottom: 1px solid var(--lime-green);  /* Subrayado */
+  color: var(--lime-green); /* Verde lima al hover */
+  border-bottom: 1px solid var(--lime-green); /* Subrayado */
 }
 
 /* ==========================================
@@ -396,58 +420,58 @@ body {
 
 /* Tablets */
 @media (max-width: 768px) {
-    :root {
-        --spacing-xl: 3rem;
-        --spacing-lg: 2rem;
-    }
-    
-    .header {
-        padding: var(--spacing-sm);
-    }
-    
-    .footer {
-        padding: var(--spacing-sm);
-    } 
-    .main-content {
-        padding: var(--spacing-lg) var(--spacing-sm);
-    }
-    
-    .main-title {
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    .carousel-slide {
-        flex: 0 0 250px;
-        height: 300px;
-    }
-    
-    .download-button {
-        font-size: 1.1rem;
-        padding: 0.875rem 2.5rem;
-    }
+  :root {
+    --spacing-xl: 3rem;
+    --spacing-lg: 2rem;
+  }
+
+  .header {
+    padding: var(--spacing-sm);
+  }
+
+  .footer {
+    padding: var(--spacing-sm);
+  }
+  .main-content {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+
+  .main-title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .carousel-slide {
+    flex: 0 0 250px;
+    height: 300px;
+  }
+
+  .download-button {
+    font-size: 1.1rem;
+    padding: 0.875rem 2.5rem;
+  }
 }
 
 /* Móviles */
 @media (max-width: 480px) {
-    :root {
-        --spacing-xl: 2rem;
-        --spacing-lg: 1.5rem;
-    }
-    
-    .carousel-wrapper::before,
-    .carousel-wrapper::after {
-        width: 50px;
-    }
-    
-    .carousel-slide {
-        flex: 0 0 200px;
-        height: 250px;
-    }
-    
-    .download-button {
-        font-size: 1rem;
-        padding: 0.75rem 2rem;
-    }
+  :root {
+    --spacing-xl: 2rem;
+    --spacing-lg: 1.5rem;
+  }
+
+  .carousel-wrapper::before,
+  .carousel-wrapper::after {
+    width: 50px;
+  }
+
+  .carousel-slide {
+    flex: 0 0 200px;
+    height: 250px;
+  }
+
+  .download-button {
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+  }
 }
 
 /* ==========================================
@@ -457,28 +481,28 @@ body {
 /* Focus visible para navegación con teclado */
 button:focus-visible,
 .indicator:focus-visible {
-    outline: 3px solid var(--cyan-bright);
-    outline-offset: 4px;
+  outline: 3px solid var(--cyan-bright);
+  outline-offset: 4px;
 }
 
 /* Prefers reduced motion */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Modo de alto contraste */
 @media (prefers-contrast: high) {
-    .download-button {
-        border: 2px solid var(--white);
-    }
-    
-    .carousel-slide {
-        border: 2px solid var(--white);
-    }
+  .download-button {
+    border: 2px solid var(--white);
+  }
+
+  .carousel-slide {
+    border: 2px solid var(--white);
+  }
 }

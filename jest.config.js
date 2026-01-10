@@ -1,32 +1,14 @@
 module.exports = {
-  // Entorno de testing (simula navegador)
   testEnvironment: 'jsdom',
   
-  // Dónde buscar los tests
-  testMatch: [
-    '**/tests/**/*.test.js',
-    '**/tests/**/*.spec.js'
-  ],
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
   
-  // Qué archivos ignorar
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/dist/',
-    '/build/'
-  ],
-  
-  // Setup files 
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js']
-
-  // Configuración de cobertura
   collectCoverageFrom: [
     'src/js/**/*.js',
     '!src/js/app.js',
-    '!src/**/*.spec.js',
-    '!**/node_modules/**'
+    '!**/node_modules/**',
   ],
   
-  // Umbrales de cobertura (opcionales pero recomendados)
   coverageThreshold: {
     global: {
       branches: 65,
@@ -36,12 +18,9 @@ module.exports = {
     }
   },
   
-  // Setup files (se ejecutan antes de cada test)
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
+  moduleDirectories: ['node_modules'],
   
-  // Module paths
-  moduleDirectories: ['node_modules', 'src'],
-  
-  // Verbose output
-  verbose: true
+  testMatch: [
+    '**/tests/**/*.test.js'
+  ]
 };
