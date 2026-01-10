@@ -14,7 +14,7 @@
     "lint:fix": "eslint src/**/*.js tests/**/*.js --fix",
     "format": "prettier --write \"src/**/*.{js,css,html}\" \"tests/**/*.js\"",
     "format:check": "prettier --check \"src/**/*.{js,css,html}\" \"tests/**/*.js\"",
-    "serve": "npx serve src -p 3000",
+    "serve": "npx serve src -l 3000",
     "build": "echo 'Static site - no build needed'",
     "docker:build": "docker build -t taller-lectura:latest -f docker/Dockerfile .",
     "docker:run": "docker run -d -p 3000:80 --name taller-lectura taller-lectura:latest"

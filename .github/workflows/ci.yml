@@ -1,0 +1,158 @@
+name: CI Pipeline
+
+# Disparar en Pull Requests a main y pushes a main
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+# Permisos necesarios
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  # ==========================================
+  # JOB 1: Linting y Code Quality
+  # ==========================================
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+        continue-on-error: false
+
+  # ==========================================
+  # JOB 2: Tests Unitarios
+  # ==========================================
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test -- --ci --coverage --maxWorkers=2
+
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v4
+        if: success()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+        continue-on-error: true
+
+  # ==========================================
+  # JOB 3: Build Verification
+  # ==========================================
+  build:
+    name: Verify Build
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify project structure
+        run: |
+          echo "Verificando estructura del proyecto..."
+          test -f src/index.html || exit 1
+          test -f src/css/styles.css || exit 1
+          test -f src/js/app.js || exit 1
+          test -f src/js/carousel.js || exit 1
+          test -f src/js/downloadCounter.js || exit 1
+          test -f src/js/googleDriveDownloader.js || exit 1
+          echo "Todos los archivos principales existen"
+
+      - name: Check code formatting
+        run: npm run format -- --check
+        continue-on-error: true
+
+  # ==========================================
+  # JOB 4: Security Audit
+  # ==========================================
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+  # ==========================================
+  # JOB 5: Summary Report
+  # ==========================================
+  report:
+    name: Pipeline Summary
+    runs-on: ubuntu-latest
+    needs: [lint, test, build, security]
+    if: always()
+    
+    steps:
+      - name: Check all jobs status
+        run: |
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo " CI Pipeline Summary"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Lint: ${{ needs.lint.result }}"
+          echo "Tests: ${{ needs.test.result }}"
+          echo "Build: ${{ needs.build.result }}"
+          echo "Security: ${{ needs.security.result }}"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          
+          if [ "${{ needs.lint.result }}" != "success" ] || [ "${{ needs.test.result }}" != "success" ] || [ "${{ needs.build.result }}" != "success" ]; then
+            echo " Pipeline FAILED"
+            exit 1
+          fi
+          
+          echo " Pipeline PASSED"
