@@ -41,3 +41,7 @@ docker-compose.override.yml
 # Temporary files
 *.tmp
 .cache/
+
+# AWS CLI installation files
+aws/
+awscliv2.zip
