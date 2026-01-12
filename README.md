@@ -97,15 +97,36 @@ npm run serve
 ```
 
 ## Docker
+### Build y Run
 ```bash
 # Build image
-docker build -t taller-lectura .
+docker build -t taller-lectura:latest .
 
 # Run container
-docker run -p 8080:80 taller-lectura
+docker run -d -p 8080:80 --name taller-lectura taller-lectura:latest
 
-# Abrir navegador en http://localhost:8080
+# O usar docker-compose
+docker-compose up -d
 ```
+
+### Acceso
+
+- Aplicación: http://localhost:8080
+- Nginx logs: `docker logs taller-lectura`
+
+### Comandos útiles
+```bash
+# Ver containers
+docker ps
+
+# Detener
+docker-compose down
+
+# Rebuild
+docker-compose up -d --build
+```
+
+Ver documentación completa: [docs/DOCKER.md](docs/DOCKER.md)
 
 ## CI/CD Pipeline
 
