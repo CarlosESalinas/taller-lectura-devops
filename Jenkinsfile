@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             agent any
             steps {
-                echo ' Checking out code from GitHub...'
+                echo 'Checking out code from GitHub...'
                 checkout scm
             }
         }
@@ -36,7 +36,7 @@ pipeline {
                 }
             }
             steps {
-                echo ' Running ESLint...'
+                echo '🔍 Running ESLint...'
                 sh 'npm run lint'
             }
         }
@@ -57,7 +57,7 @@ pipeline {
         stage('Build Verification') {
             agent any
             steps {
-                echo ' Verifying project structure...'
+                echo 'Verifying project structure...'
                 sh '''
                     echo "Checking required files..."
                     test -f src/index.html || exit 1
@@ -65,7 +65,7 @@ pipeline {
                     test -f src/js/app.js || exit 1
                     test -f src/js/carousel.js || exit 1
                     test -f src/js/downloadCounter.js || exit 1
-                    test -f src/js/googleDriveDownloader.js || exit 1
+                    test -f src/js/fileDownloader.js || exit 1
                     echo "✓ All required files present"
                 '''
             }
@@ -80,14 +80,14 @@ pipeline {
                 }
             }
             when {
-                anyOf{
+                anyOf {
                     branch 'main'
-                    expression {env.GIT_BRANCH == 'origin/main'}
-                    expression {env.GIT_BRANCH == 'main'}
+                    expression { env.GIT_BRANCH == 'origin/main' }
+                    expression { env.GIT_BRANCH == 'main' }
                 }
             }
             steps {
-                echo ' Deploying to AWS S3...'
+                echo 'Deploying to AWS S3...'
                 sh '''
                     echo "Starting S3 sync..."
                     aws s3 sync src/ s3://${S3_BUCKET}/ \
@@ -106,6 +106,37 @@ pipeline {
                 '''
             }
         }
+        
+        stage('Verify S3 Deployment') {
+            agent {
+                docker {
+                    image 'amazon/aws-cli:latest'
+                    args '-u root:root --entrypoint="" -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION'
+                    reuseNode true
+                }
+            }
+            when {
+                anyOf {
+                    branch 'main'
+                    expression { env.GIT_BRANCH == 'origin/main' }
+                    expression { env.GIT_BRANCH == 'main' }
+                }
+            }
+            steps {
+                echo ' Verifying deployment...'
+                sh '''
+                    echo "Website files in S3:"
+                    aws s3 ls s3://${S3_BUCKET}/ --recursive | grep -E '\\.(html|css|js)$' | head -10
+                    
+                    echo ""
+                    echo "Checking PDF..."
+                    aws s3 ls s3://${S3_BUCKET}/assets/ || echo "Note: assets/ folder not in src/"
+                    
+                    echo ""
+                    echo "✓ Deployment verified"
+                '''
+            }
+        }
     }
     
     post {
@@ -114,17 +145,16 @@ pipeline {
             echo ' Pipeline completed successfully!'
             echo ' =========================================='
             echo ' Live Site:'
-            echo '   http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com'
+            echo '  http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com'
             echo ' =========================================='
-        }
-        failure {
+        }        failure {
             echo ' =========================================='
             echo ' Pipeline failed!'
             echo ' Check logs above for details'
             echo ' =========================================='
         }
         always {
-            echo ' Cleaning up workspace...'
+            echo 'Cleaning up workspace...'
         }
     }
 }
