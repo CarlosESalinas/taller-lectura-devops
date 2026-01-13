@@ -80,7 +80,11 @@ pipeline {
                 }
             }
             when {
-                branch 'main'
+                anyOf{
+                    branch 'main'
+                    expression {env.GIT_BRANCH == 'origin/main'}
+                    expression {env.GIT_BRANCH == 'main'}
+                }
             }
             steps {
                 echo ' Deploying to AWS S3...'
