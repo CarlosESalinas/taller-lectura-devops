@@ -45,3 +45,12 @@ docker-compose.override.yml
 # AWS CLI installation files
 aws/
 awscliv2.zip
+
+# Assets (PDFs, imágenes grandes, etc.)
+assets/
+*.pdf
+
+# Archivos temporales de AWS
+bucket-policy.json
+cloudfront-config.json
+jenkins-policy.json

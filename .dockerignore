@@ -6,15 +6,27 @@ npm-debug.log*
 tests/
 coverage/
 *.test.js
+jest.config.js
 
 # Git
 .git/
 .gitignore
 .github/
+.gitattributes
+
+# Node 
+node_modeles/
+npm-debug.log*
+package-lock.json
 
 # Documentation
-docs/
 README.md
+docs/
+*.md
+
+# Assets 
+assets/
+*.pdf
 
 # IDE
 .vscode/
@@ -25,8 +37,9 @@ README.md
 Thumbs.db
 
 # CI/CD
-Jenkinsfile
 .github/
+Jenkinsfile
+.jenkins/
 
 # Docker
 Dockerfile
@@ -35,6 +48,11 @@ docker-compose.yml
 
 # Logs
 *.log
+
+
+# Temp files
+*.tmp
+*.temp
 
 # Environment
 .env
