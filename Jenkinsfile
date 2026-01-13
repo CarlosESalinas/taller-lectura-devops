@@ -75,7 +75,7 @@ pipeline {
             agent {
                 docker {
                     image 'amazon/aws-cli:latest'
-                    args '-u root:root --entrypoint=""'
+                    args '-u root:root --entrypoint="" -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION'
                     reuseNode true
                 }
             }
