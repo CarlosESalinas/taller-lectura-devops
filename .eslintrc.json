@@ -26,6 +26,7 @@
     "no-console": "warn",
     "no-unused-vars": "warn",
     "prefer-const": "error",
-    "no-var": "error"
+    "no-var": "error",
+    "no-redeclare": ["error", { "builtinGlobals": false }]
   }
 }
