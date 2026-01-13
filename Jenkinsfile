@@ -10,13 +10,18 @@ pipeline {
         stage('Checkout') {
             agent any
             steps {
-                echo 'Checking out code from GitHub...'
+                echo ' Checking out code from GitHub...'
                 checkout scm
             }
         }
         
         stage('Install Dependencies') {
-            agent any
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                    reuseNode true
+                }
+            }
             steps {
                 echo 'Installing npm dependencies...'
                 sh 'npm ci'
@@ -24,17 +29,27 @@ pipeline {
         }
         
         stage('Lint') {
-            agent any
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                    reuseNode true
+                }
+            }
             steps {
-                echo 'Running ESLint...'
+                echo ' Running ESLint...'
                 sh 'npm run lint'
             }
         }
         
         stage('Run Tests') {
-            agent any
+            agent {
+                docker {
+                    image 'node:20-alpine'
+                    reuseNode true
+                }
+            }
             steps {
-                echo 'Running Jest tests...'
+                echo ' Running Jest tests...'
                 sh 'npm test -- --ci --coverage'
             }
         }
@@ -42,7 +57,7 @@ pipeline {
         stage('Build Verification') {
             agent any
             steps {
-                echo 'Verifying project structure...'
+                echo ' Verifying project structure...'
                 sh '''
                     echo "Checking required files..."
                     test -f src/index.html || exit 1
@@ -68,7 +83,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-                echo 'Deploying to AWS S3...'
+                echo ' Deploying to AWS S3...'
                 sh '''
                     echo "Starting S3 sync..."
                     aws s3 sync src/ s3://${S3_BUCKET}/ \
@@ -96,7 +111,7 @@ pipeline {
             echo ' =========================================='
             echo ' Live Site:'
             echo '   http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com'
-            echo '=========================================='
+            echo ' =========================================='
         }
         failure {
             echo ' =========================================='
