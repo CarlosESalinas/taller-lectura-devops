@@ -45,3 +45,4 @@ docker-compose.override.yml
 # AWS CLI installation files
 aws/
 awscliv2.zip
+bucket-policy.json
