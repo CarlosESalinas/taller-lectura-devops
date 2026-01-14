@@ -1,3 +1,10 @@
+/* eslint-disable no-console */
+/**
+ * app.js
+ * Punto de entrada principal de la aplicación
+ * Integra todos los componentes: Carousel, DownloadCounter, FileDownloader
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Inicializando aplicación del Taller de Lectura...');
 
@@ -50,14 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 3. INICIALIZAR DESCARGADOR DE GOOGLE DRIVE
+  // 3. INICIALIZAR DESCARGADOR DE ARCHIVOS
   // ==========================================
-  const downloader = new GoogleDriveDownloader();
+  const downloader = new FileDownloader();
 
-  // URL del libro en Google Drive
-  const BOOK_FILE_ID = '1Ln36hTd7AyVJgZ3k7d22kK5mo7uS8Mqe';
+  // URL del libro en AWS S3
+  const BOOK_URL = 'http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com/assets/libro-taller-lectura-UNAM.pdf';
 
-  console.log('GoogleDriveDownloader inicializado');
+  console.log('FileDownloader inicializado');
 
   // ==========================================
   // 4. CONECTAR BOTÓN DE DESCARGA
@@ -83,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 600);
       }
 
-      // Iniciar descarga desde Google Drive
-      downloader.download(BOOK_FILE_ID, () => {
-        console.log('Descarga iniciada desde Google Drive');
+      // Iniciar descarga desde S3
+      downloader.download(BOOK_URL, () => {
+        console.log('Descarga iniciada desde AWS S3');
       });
 
       // Feedback visual en el botón

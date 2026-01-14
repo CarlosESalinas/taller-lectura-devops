@@ -12,8 +12,7 @@ class FileDownloader {
    * @param {Object} options - Opciones de configuración
    */
   constructor(options = {}) {
-    this.window =
-      options.window || (typeof window !== 'undefined' ? window : null);
+    this.window = options.window || (typeof window !== 'undefined' ? window : null);
   }
 
   /**

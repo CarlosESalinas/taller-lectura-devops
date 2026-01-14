@@ -15,15 +15,11 @@ class Carousel {
     this.container = container;
 
     // Adaptación: buscar .carousel-slide en lugar de .carousel-image
-    this.images = Array.from(
-      container.querySelectorAll('.carousel-slide') || []
-    );
+    this.images = Array.from(container.querySelectorAll('.carousel-slide') || []);
 
     // Si no hay slides, intentar buscar .carousel-image (retrocompatibilidad)
     if (this.images.length === 0) {
-      this.images = Array.from(
-        container.querySelectorAll('.carousel-image') || []
-      );
+      this.images = Array.from(container.querySelectorAll('.carousel-image') || []);
     }
 
     this.currentIndex = 0;
@@ -93,8 +89,7 @@ class Carousel {
    * Ir a la imagen anterior
    */
   prev() {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.images.length) % this.images.length;
+    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
     this.updateDisplay();
   }
 
@@ -115,8 +110,7 @@ class Carousel {
    */
   handleManualScroll() {
     // Calcular qué imagen está más centrada
-    const containerCenter =
-      this.container.scrollLeft + this.container.offsetWidth / 2;
+    const containerCenter = this.container.scrollLeft + this.container.offsetWidth / 2;
 
     let closestIndex = 0;
     let closestDistance = Infinity;
@@ -177,9 +171,7 @@ class Carousel {
 
     this.isScrolling = true;
 
-    const scrollPosition =
-      currentImage.offsetLeft -
-      (this.container.offsetWidth - currentImage.offsetWidth) / 2;
+    const scrollPosition = currentImage.offsetLeft - (this.container.offsetWidth - currentImage.offsetWidth) / 2;
 
     this.container.scrollTo({
       left: scrollPosition,
