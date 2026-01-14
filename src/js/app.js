@@ -1,4 +1,3 @@
-/* global Carousel, DownloadCounter, FileDownloader */
 /* eslint-disable no-console */
 /**
  * app.js
