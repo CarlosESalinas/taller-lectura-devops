@@ -19,7 +19,7 @@
   "globals":{
     "Carousel": "readonly",
     "DownloadCounter": "readonly",
-    "fileDownloader": "readonly"
+    "FileDownloader": "readonly"
   },
   "rules": {
     "prettier/prettier": "error",
