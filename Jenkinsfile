@@ -50,7 +50,7 @@ pipeline {
             }
             steps {
                 echo '🧪 Running Jest tests...'
-                sh 'npm test -- --ci --coverage'
+                sh 'npm test -- --ci'
             }
         }
         
