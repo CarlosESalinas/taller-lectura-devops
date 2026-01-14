@@ -18,7 +18,7 @@ Proyecto DevOps completo: Sitio web del Taller de Lectura con TDD, CI/CD, Docker
 - ✅ **Persistent Storage** - localStorage para contador
 - ✅ **Google Drive Integration** - Descarga directa de archivos
 
-## 📦 Tech Stack
+## Tech Stack
 
 ### Frontend
 - HTML5 semántico
@@ -80,7 +80,7 @@ npm run lint
 npm run format
 ```
 
-**Tests actuales: 19/19 passing ✅**
+**Tests actuales: 19/19 passing**
 - DownloadCounter: 6 tests
 - Carousel: 8 tests
 - GoogleDriveDownloader: 5 tests
@@ -146,9 +146,19 @@ Pipeline de deployment:
 5. Deploy to Production
 
 ## Deployment
+### Production 
 
-**Staging:** https://staging-taller-lectura.example.com  
-**Production:** https://taller-lectura.example.com
+**Live Site:** http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com
+
+- **Hosting:** AWS S3 Static Website Hosting
+- **CI/CD:** GitHub Actions + Jenkins
+- **Deploy:** Automático en merge a `main`
+
+### Infrastructure
+- **S3 Bucket:** `taller-lectura-prod`
+- **Region:** us-east-1
+- **PDF Storage:** S3 (`/assets/libro-taller-lectura-UNAM.pdf`)
+
 
 ## Autor
 
@@ -166,3 +176,11 @@ MIT License - ver [LICENSE](LICENSE) para más detalles
 - Programa de Derechos Humanos - UNAM
 - Taller de Lectura y Expresión Artística
 - Niñas y niños participantes del taller
+
+## Descarga del libro 
+
+El libro está alojado en AWS S3:
+- URL: http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com/assets/libro-taller-lectura-UNAM.pdf
+- Formato: PDF
+- Tamaño: ~5MB
+- Headers: Cache-Control, Content-Type optimizados
