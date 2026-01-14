@@ -19,11 +19,7 @@ describe('Carousel', () => {
     });
 
     // Mock de imágenes
-    mockImages = [
-      createMockElement(),
-      createMockElement(),
-      createMockElement(),
-    ];
+    mockImages = [createMockElement(), createMockElement(), createMockElement()];
 
     // Mock de botones y dots
     const mockPrevBtn = createMockElement();

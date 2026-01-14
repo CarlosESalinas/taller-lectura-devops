@@ -43,8 +43,7 @@ describe('FileDownloader', () => {
     });
 
     test('debe funcionar con URLs de S3', () => {
-      const s3Url =
-        'http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com/assets/libro.pdf';
+      const s3Url = 'http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com/assets/libro.pdf';
 
       downloader.download(s3Url);
 

@@ -6,11 +6,7 @@ class DownloadCounter {
    * Ventaja: Podemos mockear en tests, cambiar a sessionStorage, IndexedDB, etc.
    */
   constructor(storage) {
-    if (
-      !storage ||
-      typeof storage.getItem !== 'function' ||
-      typeof storage.setItem !== 'function'
-    ) {
+    if (!storage || typeof storage.getItem !== 'function' || typeof storage.setItem !== 'function') {
       throw new Error('Storage debe implementar getItem y setItem');
     }
 
