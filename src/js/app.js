@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloader = new FileDownloader();
 
   // URL del libro en AWS S3
-  const BOOK_URL = 'http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com/assets/libro-taller-lectura-UNAM-v2.0.pdf';
+  const BOOK_URL =
+    'http://taller-lectura-prod.s3-website-us-east-1.amazonaws.com/assets/libro-taller-lectura-UNAM-v2.0.pdf';
 
   console.log('FileDownloader inicializado');
 
